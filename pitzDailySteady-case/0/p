@@ -42,7 +42,12 @@ boundaryField
 
     frontAndBack
     {
-        type            empty;
+        type            symmetryPlane;
+    }
+
+    wing
+    {
+       type            zeroGradient;
     }
 }
 
