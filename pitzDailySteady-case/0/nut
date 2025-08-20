@@ -32,17 +32,21 @@ boundaryField
     }
     upperWall
     {
-        type            nutkWallFunction;
+        type            calculated;
         value           uniform 0;
     }
     lowerWall
     {
-        type            nutkWallFunction;
+        type            calculated;
         value           uniform 0;
     }
     frontAndBack
     {
-        type            empty;
+        type            calculated; value uniform 0;
+    }
+    wing
+    {
+       type nutkWallFunction; value uniform 0;
     }
 }
 

@@ -42,14 +42,14 @@ boundaryField
 
     frontAndBack
     {
-        type            symmetryPlane;
+        type            slip;
     }
 
     wing
     {
-        type noSlip;
+        type           noSlip;
     }
 }
-}
+
 
 // ************************************************************************* //
