@@ -20,12 +20,12 @@ RAS
 {
     // Tested with kEpsilon, realizableKE, kOmega, kOmega2006, kOmegaSST, v2f,
     // ShihQuadraticKE, LienCubicKE.
-    model           kEpsilon;
+    model           kOmegaSST;
 
     turbulence      on;
 
 
-    viscosityModel  Newtonian;
+    printCoeffs on;
 }
 
 
