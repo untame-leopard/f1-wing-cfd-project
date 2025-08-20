@@ -29,7 +29,7 @@ castellatedMeshControls
     features
     (
         {
-            file "f1wing.eMesh";
+            file "constant/triSurface/f1wing.eMesh";
             level 2;
         }
     );
