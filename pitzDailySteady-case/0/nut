@@ -30,17 +30,12 @@ boundaryField
         type            calculated;
         value           uniform 0;
     }
-    upperWall
+    topBottom
     {
         type            calculated;
         value           uniform 0;
     }
-    lowerWall
-    {
-        type            calculated;
-        value           uniform 0;
-    }
-    frontAndBack
+    sides
     {
         type            calculated; value uniform 0;
     }

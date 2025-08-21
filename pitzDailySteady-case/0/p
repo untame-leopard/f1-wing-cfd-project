@@ -30,17 +30,12 @@ boundaryField
         value           uniform 0;
     }
 
-    upperWall
+    topBottom
     {
         type            zeroGradient;
     }
 
-    lowerWall
-    {
-        type            zeroGradient;
-    }
-
-    frontAndBack
+    sides
     {
         type            zeroGradient;
     }

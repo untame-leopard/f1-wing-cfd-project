@@ -1,91 +1,164 @@
 /*--------------------------------*- C++ -*----------------------------------*\
-| =========                 |                                                 |
-| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
-|  \\    /   O peration     | Version:  any                                   |
-|   \\  /    A nd           | Web:      https://openfoam.org                  |
-|    \\/     M anipulation  |                                                 |
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  13
+     \\/     M anipulation  |
 \*---------------------------------------------------------------------------*/
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  13
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       dictionary;
+    object      snappyHexMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
+// Which of the steps to run
 castellatedMesh true;
 snap            true;
 addLayers       true;
 
+// Geometry
 geometry
 {
-    f1wing.stl
+    // your STL (must be in constant/triSurface/)
+    wing
     {
-        type triSurfaceMesh;
-        name wing;
+        type triSurfaceMesh;    // motorBike template used triSurface; OF13 prefers triSurfaceMesh
+        file "f1wing.stl";
     }
-}
 
+    // same as tutorial, but sized for your case
+    refinementBox
+    {
+        type box;
+        min (-1.0 -0.7 0.0);
+        max ( 8.0  0.7 2.5);
+    }
+};
+
+// =================== CASTELLATED MESH ===================
 castellatedMeshControls
 {
-    maxLocalCells 1000000;
-    maxGlobalCells 2000000;
-    minRefinementCells 10;
-    nCellsBetweenLevels 3;
+    // Refinement parameters
+    maxLocalCells        100000;
+    maxGlobalCells       2000000;
+    minRefinementCells   10;
+    maxLoadUnbalance     0.10;
+    nCellsBetweenLevels  3;
 
+    // edge/angle handling
+    resolveFeatureAngle 30;
+
+    // MOTORBIKE TEMPLATE USED insidePoint; we keep it, but fix the value
+    insidePoint (0 0 0.43);
+
+    // OF-13 key doing the same job; we keep this too, using the same point
+    locationInMesh (0 0 0.43);
+
+    // -------- Explicit feature edge refinement (YOU SAID YOU HAVE eMesh) -------
     features
     (
         {
-            file "constant/triSurface/f1wing.eMesh";
-            level 2;
+            file "f1wing.eMesh";   // place in constant/triSurface/
+            level 4;               // typical 2–6; adjust as you like
         }
     );
 
+    // -------- Surface-based refinement --------
     refinementSurfaces
     {
         wing
         {
-            level (3 5);   // surface min and max refinement
+            level (3 4);           // min max
             patchInfo
             {
                 type wall;
                 inGroups (wingGroup);
+                name wing;
             }
         }
     }
 
-    resolveFeatureAngle 30;
-
+    // -------- Region-wise refinement (inside the box) --------
     refinementRegions
     {
+        refinementBox
+        {
+            mode   inside;
+            levels ((1e15 4));
+        }
     }
 
-    locationInMesh (0 0 0);  // MUST be inside fluid domain
+    // -------- Mesh selection / zones behaviour (YOU WANT THIS KEPT) --------
+    allowFreeStandingZoneFaces true;
 }
 
+// ======================= SNAPPING =======================
 snapControls
 {
     nSmoothPatch 3;
-    tolerance 4.0;
-    nSolveIter 30;
-    nRelaxIter 5;
+    tolerance    2.0;
+    nSolveIter   30;
+    nRelaxIter   5;
+
+    // use your explicit features (.eMesh)
+    nFeatureSnapIter     10;
+    implicitFeatureSnap  false;
+    explicitFeatureSnap  true;
+    multiRegionFeatureSnap false;
 }
 
+// ======================= LAYERS =========================
 addLayersControls
 {
     relativeSizes true;
+
     layers
     {
         wing
         {
-            nSurfaceLayers 3;   // start small, can increase to 10+
+            nSurfaceLayers 3;   // start small; increase after it works
         }
     }
 
     expansionRatio 1.2;
-    finalLayerThickness 0.3;
-    minThickness 0.1;
+    finalLayerThickness 0.25;
+    minThickness 0.05;
     nGrow 0;
+
+    featureAngle 60;           // 60° is a sane default; 100° often fails
+    slipFeatureAngle 30;
+
+    nRelaxIter 3;
+
+    nSmoothSurfaceNormals 1;
+    nSmoothNormals 3;
+    nSmoothThickness 10;
+
+    maxFaceThicknessRatio 0.5;
+    maxThicknessToMedialRatio 0.3;
+    minMedianAxisAngle 90;
+
+    nBufferCellsNoExtrude 0;
+
+    nLayerIter 50;
 }
 
+// ===================== QUALITY ==========================
 meshQualityControls
 {
-    maxNonOrtho 65;
-    maxBoundarySkewness 20;
-    maxInternalSkewness 4;
-    maxConcave 80;
+    #include "meshQualityDict"     // leave as the tutorial does (see file below)
 }
 
+// Advanced
+writeFlags (scalarLevels layerSets layerFields);
+mergeTolerance 1e-6;
+// ************************************************************************* //

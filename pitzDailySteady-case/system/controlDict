@@ -14,7 +14,7 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-solver          incompressibleFluid;
+application     simpleFoam; //Steady RANS solver
 
 startFrom       startTime;
 
@@ -43,5 +43,35 @@ timeFormat      general;
 timePrecision   6;
 
 runTimeModifiable true;
+
+functions
+{
+    forceCoeffs
+    {
+        type            forceCoeffs;
+        libs            ("libforces.so");
+
+        patches         (wing);     // <-- must match your STL patch name after snappy
+
+        // Fluid properties (for incompressible simpleFoam)
+        rho             rhoInf;
+        rhoInf          1.225;
+
+        // Reference frame & directions
+        CofR            (0 0 0);    // centre of rotation (e.g. quarter-chord if you track Cm)
+        liftDir         (0 1 0);    // set to your global +Y if lift is vertical
+        dragDir         (1 0 0);    // set to your global +X if flow is +X
+        pitchAxis       (0 0 1);
+
+        // Reference values
+        magUInf         50;         // inlet speed [m/s]
+        lRef            1;          // chord [m]  <-- change
+        Aref            0.20;       // span*chord [m^2]  <-- change
+
+        // Output cadence
+        writeControl    timeStep;
+        writeInterval   50;
+    }
+}
 
 // ************************************************************************* //

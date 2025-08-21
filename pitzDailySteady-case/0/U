@@ -30,17 +30,12 @@ boundaryField
         type            zeroGradient;
     }
 
-    upperWall
+    topBottom
     {
         type            slip;
     }
 
-    lowerWall
-    {
-        type            slip;
-    }
-
-    frontAndBack
+    sides
     {
         type            slip;
     }
