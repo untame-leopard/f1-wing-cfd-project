@@ -1,3 +1,0 @@
-
-paraview:1067 terminated with signal 11 at PC=718dee7f6758 SP=7ffd2100c288.  Backtrace:
-/usr/lib/x86_64-linux-gnu/libvtkCommonCore-pv5.11.so.1(+0xff6758)[0x718dee7f6758]
