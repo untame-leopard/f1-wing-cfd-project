@@ -5,3 +5,4 @@ constant/triSurface/*.vtk
 problemFaces
 processor*
 paraview.*
+*.log
