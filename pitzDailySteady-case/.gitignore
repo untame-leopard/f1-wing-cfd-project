@@ -1,0 +1,7 @@
+constant/polyMesh/
+constant/extendedFeatureEdgeMesh/
+constant/triSurface/*.vtk
+*.obj
+problemFaces
+processor*
+paraview.*
