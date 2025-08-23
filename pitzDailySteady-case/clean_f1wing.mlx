@@ -1,0 +1,26 @@
+<!DOCTYPE FilterScript>
+<FilterScript>
+
+  <filter name="Remove Duplicate Vertices"/>
+  <filter name="Remove Duplicate Faces"/>
+  <filter name="Remove Unreferenced Vertices"/>
+
+  <filter name="Merge Close Vertices">
+    <!-- merge distance in meters -->
+    <Param type="RichAbsPerc" name="Threshold" value="1e-5"/>
+  </filter>
+
+  <filter name="Remove Unreferenced Vertices"/>
+
+ <filter name="Remove Isolated pieces (wrt Face Num.)">
+    <Param type="RichInt" name="MinComponentSize" value="500"/>
+  </filter>
+
+  <filter name="Close Holes">
+    <Param type="RichInt"  name="MaxHoleSize"         value="200"/>
+    <Param type="RichBool" name="Selected"            value="false"/>
+    <Param type="RichBool" name="SelfIntersection"    value="false"/>
+    <Param type="RichBool" name="NewFaceSelected"     value="false"/>
+  </filter>
+
+</FilterScript>
