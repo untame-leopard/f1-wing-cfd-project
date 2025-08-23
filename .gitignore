@@ -1,1 +1,14 @@
+constant/polyMesh/
+constant/extendedFeatureEdgeMesh/
+constant/triSurface/*.vtk
+*.obj
+problemFaces
+processor*/
+paraview.*
+*.log
+[0-9]*/
+postProcessing/
+paraview.*.btr
+VTK/
+*.temp
 *.Zone.Identifier
