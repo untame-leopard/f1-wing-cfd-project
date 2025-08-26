@@ -1,0 +1,23 @@
+/* meshQualityDict for OF-13 */
+maxNonOrtho          70;
+maxBoundarySkewness  10;
+maxInternalSkewness  4;
+maxConcave           80;
+
+minVol               1e-15;
+minTetQuality        1e-30;
+minArea              -1;
+minTwist             0.01;
+minDeterminant       1e-9;
+minFaceWeight        1e-3;
+minVolRatio          0.01;
+minTriangleTwist     -1;
+
+nSmoothScale         4;
+errorReduction       0.75;
+
+// relaxed block (optional for layer growth)
+//relaxed
+//{
+//  maxNonOrtho  75;
+//}
