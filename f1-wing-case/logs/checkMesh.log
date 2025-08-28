@@ -1,0 +1,122 @@
+/*---------------------------------------------------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  13
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+Build  : 13-65eda17ad4ca
+Exec   : checkMesh -allGeometry -allTopology
+Date   : Aug 28 2025
+Time   : 22:53:55
+Host   : "Batcomputer"
+PID    : 1143
+I/O    : uncollated
+Case   : /home/alexp/projects/f1-wing/f1-wing-case
+nProcs : 1
+sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh for time = 0
+
+Enabling all (cell, face, edge, point) topology checks.
+
+Enabling all geometry checks.
+
+Time = 0s
+
+Mesh stats
+    points:           4564272
+    faces:            13447525
+    internal faces:   13382575
+    cells:            4443036
+    faces per cell:   6.03869
+    boundary patches: 5
+    point zones:      0
+    face zones:       0
+    cell zones:       0
+
+Overall number of cells of each type:
+    hexahedra:     4381060
+    prisms:        499
+    wedges:        0
+    pyramids:      0
+    tet wedges:    18
+    tetrahedra:    0
+    polyhedra:     61459
+    Breakdown of polyhedra by number of faces:
+        faces   number of cells
+            4   1369
+            5   1209
+            6   3224
+            7   19
+            8   32
+            9   53154
+           10   15
+           11   67
+           12   1634
+           13   33
+           14   64
+           15   595
+           17   4
+           18   40
+
+Checking topology...
+    Boundary definition OK.
+    Cell to face addressing OK.
+    Point usage OK.
+    Upper triangular ordering OK.
+    Face vertices OK.
+    Topological cell zip-up check OK.
+    Face-face connectivity OK.
+    Number of regions: 1 (OK).
+
+Checking patch topology for multiply connected surfaces...
+                   Patch    Faces   Points                  Surface topology
+                   inlet     3200     3321  ok (non-closed singly connected)
+                  outlet     3200     3321  ok (non-closed singly connected)
+                   sides     6400     6642  ok (non-closed singly connected)
+               topBottom    38708    39368  ok (non-closed singly connected)
+                    wing    13442    15698  multiply connected (shared edge)
+
+Checking geometry...
+    Overall domain bounding box (-5 -5 -1) (15 5 1)
+    Patch bounding boxes
+                       inlet (-5 -5 -1) (-5 5 1)
+                      outlet (15 -5 -1) (15 5 1)
+                       sides (-5 -5 -1) (15 5 1)
+                   topBottom (-5 -5 -1) (15 5 1)
+                        wing (-0.599279 -1.22489 -0.203874) (0.599279 -0.743562 0.0184731)
+    Mesh has 3 geometric (non-empty/wedge) directions (1 1 1)
+    Mesh has 3 solution (non-empty) directions (1 1 1)
+    Max cell openness = 3.62763e-16 OK.
+    Max aspect ratio = 18.0298 OK.
+    Minimum face area = 1.4886e-06. Maximum face area = 0.0314377.  Face area magnitudes OK.
+    Min volume = 1.72128e-08. Max volume = 0.00157516.  Total volume = 399.996.  Cell volumes OK.
+    Mesh non-orthogonality Max: 69.9995 average: 4.98264
+    Non-orthogonality check OK.
+    Face pyramids OK.
+ ***Max skewness = 8.17073, 13 highly skew faces detected which may impair the quality of the results
+    Coupled point location match (average 0) OK.
+ ***Error in face tets: 1 faces with low quality or negative volume decomposition tets.
+    Min/max edge length = 0.00026634 0.250446 OK.
+   *There are 1984 faces with concave angles between consecutive edges. Max concave angle = 79.9849 degrees.
+    Face flatness (1 = flat, 0 = butterfly) : min = 0.222919  average = 0.999928
+   *There are 1096 faces with ratio between projected and actual area < 0.8
+    Minimum ratio (minimum flatness, maximum warpage) = 0.222919
+    Cell determinant (wellposedness) : minimum: 0.0093696 average: 2.43181
+    Cell determinant check OK.
+ ***Concave cells (using face planes) found, number of cells: 53475
+    Face interpolation weight : minimum: 0.130233 average: 0.496904
+    Face interpolation weight check OK.
+    Face volume ratio : minimum: 0.0231823 average: 0.98393
+    Face volume ratio check OK.
+
+Failed 3 mesh checks.
+
+End
+
