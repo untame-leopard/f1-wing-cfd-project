@@ -26,14 +26,14 @@ gradSchemes
 
 divSchemes
 {
-    default         none;
-    div(phi,U)      bounded Gauss linearUpwind grad(U);
-    div(phi,k)      bounded Gauss limitedLinear 1;
-    div(phi,epsilon) bounded Gauss limitedLinear 1;
-    div(phi,omega)  bounded Gauss limitedLinear 1;
-    div(phi,v2)     bounded Gauss limitedLinear 1;
-    div((nuEff*dev2(T(grad(U))))) Gauss linear;
-    div(nonlinearStress) Gauss linear;
+    default         cellLimited Gauss Linear 1;
+    div(phi,U)      cellLimited Gauss Linear 1;
+    div(phi,k)      cellLimited Gauss Linear 1;
+    div(phi,epsilon) cellLimited Gauss Linear 1;
+    div(phi,omega)  cellLimited Gauss Linear 1;
+    div(phi,v2)     cellLimited Gauss Linear 1;
+    div((nuEff*dev2(T(grad(U))))) cellLimited Gauss Linear 1;
+    div(nonlinearStress) cellLimited Gauss Linear 1;
 }
 
 laplacianSchemes
